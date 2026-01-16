@@ -78,13 +78,17 @@ async function main() {
     }
 
     log.debug(
-      'Found workspace config, processing workspace member projects',
+      'Found workspace config, processing workspace members',
       workspaceMembers,
     )
     for (const member of workspaceMembers) {
-      const { filepath: memberFilepath, config: memberConfig } =
-        await readDenoConfigFile(join(Deno.cwd(), member))
-      await processProject(memberFilepath, memberConfig)
+      try {
+        const { filepath: memberFilepath, config: memberConfig } =
+          await readDenoConfigFile(join(Deno.cwd(), member))
+        await processProject(memberFilepath, memberConfig)
+      } catch (error) {
+        log.warn(`Failed to process workspace member ${member}`, error)
+      }
     }
   } else {
     await processProject(filepath, config)

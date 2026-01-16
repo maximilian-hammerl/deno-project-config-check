@@ -1,6 +1,6 @@
 {
   "name": "@maximilian-hammerl/deno-project-config-check",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "tasks": {
     "format": "deno fmt",

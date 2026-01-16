@@ -24,14 +24,17 @@ export async function runDenoCheck(
 ): Promise<boolean> {
   const parsedConfigFilePath = parse(configFilepath)
 
-  const denoCheckCommand = new Deno.Command(Deno.execPath(), {
-    args: [
-      'check',
-      '--config',
-      configFilepath,
-      join(parsedConfigFilePath.dir, '**/*.ts'),
-    ],
-  })
+  const command = Deno.execPath()
+  const args = [
+    'check',
+    '--config',
+    configFilepath,
+    join(parsedConfigFilePath.dir, '**/*.ts'),
+  ]
+
+  log.debug('Running deno check', command, args)
+
+  const denoCheckCommand = new Deno.Command(command, { args })
 
   return await runCommand(
     denoCheckCommand,
