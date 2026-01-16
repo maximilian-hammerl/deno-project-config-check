@@ -1,8 +1,7 @@
 {
   "name": "@maximilian-hammerl/deno-project-config-check",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
-  "lock": false,
   "tasks": {
     "format": "deno fmt",
     "format-check": "deno fmt --check",
@@ -16,8 +15,8 @@
     "compile-deno-config-file-json-schema-to-typescript-types": "./scripts/compile-deno-config-file-json-schema-to-typescript-types.sh"
   },
   "imports": {
-    "@std/cli": "jsr:@std/cli@^1.0.13",
-    "@std/jsonc": "jsr:@std/jsonc@^1.0.1"
+    "@std/cli": "jsr:@std/cli@1.0.25",
+    "@std/jsonc": "jsr:@std/jsonc@1.0.2"
   },
   "lint": {
     "rules": {

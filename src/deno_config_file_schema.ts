@@ -6,9 +6,178 @@
  */
 
 /**
+ * List of npm package constraints to allow or deny for lifecycle scripts.
+ */
+export type AllowScriptsList = string[]
+/**
+ * List of npm package constraints to allow or deny for lifecycle scripts.
+ */
+export type AllowScriptsList1 = string[]
+/**
+ * A permission set name to use or inline permission set.
+ */
+export type PermissionNameOrSet = string | PermissionSet
+export type AllowDenyIgnorePermissionConfigValue =
+  | PermissionConfigValue
+  | AllowDenyIgnorePermissionConfig
+export type PermissionConfigValue = boolean | string[]
+export type AllowDenyPermissionConfigValue =
+  | PermissionConfigValue
+  | AllowDenyPermissionConfig
+export type HttpsDenoLandXDenoCliSchemasLintTagsV1Json =
+  | 'fresh'
+  | 'jsr'
+  | 'jsx'
+  | 'react'
+  | 'recommended'
+  | 'workspace'
+export type HttpsDenoLandXDenoCliSchemasLintRulesV1Json =
+  | string
+  | (
+    | 'adjacent-overload-signatures'
+    | 'ban-ts-comment'
+    | 'ban-types'
+    | 'ban-unknown-rule-code'
+    | 'ban-untagged-ignore'
+    | 'ban-untagged-todo'
+    | 'ban-unused-ignore'
+    | 'camelcase'
+    | 'constructor-super'
+    | 'default-param-last'
+    | 'eqeqeq'
+    | 'explicit-function-return-type'
+    | 'explicit-module-boundary-types'
+    | 'for-direction'
+    | 'fresh-handler-export'
+    | 'fresh-server-event-handlers'
+    | 'getter-return'
+    | 'guard-for-in'
+    | 'jsx-boolean-value'
+    | 'jsx-button-has-type'
+    | 'jsx-curly-braces'
+    | 'jsx-key'
+    | 'jsx-no-children-prop'
+    | 'jsx-no-comment-text-nodes'
+    | 'jsx-no-duplicate-props'
+    | 'jsx-no-unescaped-entities'
+    | 'jsx-no-useless-fragment'
+    | 'jsx-props-no-spread-multi'
+    | 'jsx-void-dom-elements-no-children'
+    | 'no-array-constructor'
+    | 'no-async-promise-executor'
+    | 'no-await-in-loop'
+    | 'no-await-in-sync-fn'
+    | 'no-boolean-literal-for-arguments'
+    | 'no-case-declarations'
+    | 'no-class-assign'
+    | 'no-compare-neg-zero'
+    | 'no-cond-assign'
+    | 'no-console'
+    | 'no-const-assign'
+    | 'no-constant-condition'
+    | 'no-control-regex'
+    | 'no-debugger'
+    | 'no-delete-var'
+    | 'no-deprecated-deno-api'
+    | 'no-dupe-args'
+    | 'no-dupe-class-members'
+    | 'no-dupe-else-if'
+    | 'no-dupe-keys'
+    | 'no-duplicate-case'
+    | 'no-empty'
+    | 'no-empty-character-class'
+    | 'no-empty-enum'
+    | 'no-empty-interface'
+    | 'no-empty-pattern'
+    | 'no-eval'
+    | 'no-ex-assign'
+    | 'no-explicit-any'
+    | 'no-external-import'
+    | 'no-extra-boolean-cast'
+    | 'no-extra-non-null-assertion'
+    | 'no-fallthrough'
+    | 'no-func-assign'
+    | 'no-global-assign'
+    | 'no-implicit-declare-namespace-export'
+    | 'no-import-assertions'
+    | 'no-import-assign'
+    | 'no-import-prefix'
+    | 'no-inferrable-types'
+    | 'no-inner-declarations'
+    | 'no-invalid-regexp'
+    | 'no-invalid-triple-slash-reference'
+    | 'no-irregular-whitespace'
+    | 'no-misused-new'
+    | 'no-namespace'
+    | 'no-new-symbol'
+    | 'no-node-globals'
+    | 'no-non-null-asserted-optional-chain'
+    | 'no-non-null-assertion'
+    | 'no-obj-calls'
+    | 'no-octal'
+    | 'no-process-global'
+    | 'no-prototype-builtins'
+    | 'no-redeclare'
+    | 'no-regex-spaces'
+    | 'no-self-assign'
+    | 'no-self-compare'
+    | 'no-setter-return'
+    | 'no-shadow-restricted-names'
+    | 'no-sloppy-imports'
+    | 'no-slow-types'
+    | 'no-sparse-arrays'
+    | 'no-sync-fn-in-async-fn'
+    | 'no-this-alias'
+    | 'no-this-before-super'
+    | 'no-throw-literal'
+    | 'no-top-level-await'
+    | 'no-undef'
+    | 'no-unreachable'
+    | 'no-unsafe-finally'
+    | 'no-unsafe-negation'
+    | 'no-unused-labels'
+    | 'no-unused-vars'
+    | 'no-unversioned-import'
+    | 'no-useless-rename'
+    | 'no-var'
+    | 'no-window'
+    | 'no-window-prefix'
+    | 'no-with'
+    | 'prefer-as-const'
+    | 'prefer-ascii'
+    | 'prefer-const'
+    | 'prefer-namespace-keyword'
+    | 'prefer-primordials'
+    | 'react-no-danger'
+    | 'react-no-danger-with-children'
+    | 'react-rules-of-hooks'
+    | 'require-await'
+    | 'require-yield'
+    | 'single-var-declarator'
+    | 'triple-slash-reference'
+    | 'use-isnan'
+    | 'valid-typeof'
+    | 'verbatim-module-syntax'
+  )
+export type MinimumDependencyAgeDate = string | number
+
+/**
  * A JSON representation of a Deno configuration file.
  */
 export interface DenoConfigurationFileSchema {
+  allowScripts?:
+    | boolean
+    | AllowScriptsList
+    | {
+      allow?: boolean | AllowScriptsList
+      deny?: AllowScriptsList1
+    }
+  /**
+   * Configuration for `deno compile`.
+   */
+  compile?: {
+    permissions?: PermissionNameOrSet
+  }
   /**
    * Instructs the TypeScript compiler how to compile .ts files.
    */
@@ -34,6 +203,10 @@ export interface DenoConfigurationFileSchema {
      * Emit design-type metadata for decorated declarations in source files.
      */
     emitDecoratorMetadata?: boolean
+    /**
+     * Do not allow runtime constructs that are not part of ECMAScript.
+     */
+    erasableSyntaxOnly?: boolean | null
     /**
      * Interpret optional property types as written, rather than adding 'undefined'.
      */
@@ -82,6 +255,66 @@ export interface DenoConfigurationFileSchema {
      */
     lib?: string[]
     /**
+     * Specify what module code is generated.
+     */
+    module?:
+      & (
+        | ('esnext' | 'nodenext' | 'preserve')
+        | {
+          [k: string]: unknown
+        }
+      )
+      & (
+        | (
+          & (
+            | ('esnext' | 'nodenext' | 'preserve')
+            | {
+              [k: string]: unknown
+            }
+          )
+          & string
+        )
+        | (
+          & (
+            | ('esnext' | 'nodenext' | 'preserve')
+            | {
+              [k: string]: unknown
+            }
+          )
+          & null
+        )
+      )
+    /**
+     * Specify how TypeScript looks up a file from a given module specifier.
+     */
+    moduleResolution?:
+      & (
+        | ('nodenext' | 'bundler')
+        | {
+          [k: string]: unknown
+        }
+      )
+      & (
+        | (
+          & (
+            | ('nodenext' | 'bundler')
+            | {
+              [k: string]: unknown
+            }
+          )
+          & string
+        )
+        | (
+          & (
+            | ('nodenext' | 'bundler')
+            | {
+              [k: string]: unknown
+            }
+          )
+          & null
+        )
+      )
+    /**
      * Do not truncate error messages.
      */
     noErrorTruncation?: boolean
@@ -121,6 +354,24 @@ export interface DenoConfigurationFileSchema {
      * Raise an error when a function parameter isn't read
      */
     noUnusedParameters?: boolean
+    /**
+     * Specify the base directory to resolve non-relative module names.
+     */
+    baseUrl?: string | null
+    /**
+     * Specify a set of entries that re-map imports to additional lookup locations.
+     */
+    paths?: {
+      [k: string]: (string | null)[] | null
+    } | null
+    /**
+     * Declare many “virtual” directories acting as a single root.
+     */
+    rootDirs?: string[]
+    /**
+     * Skip type checking all .d.ts files.
+     */
+    skipLibCheck?: boolean
     /**
      * Enable all strict type checking options.
      */
@@ -201,241 +452,29 @@ export interface DenoConfigurationFileSchema {
      * List of files, directories or globs that will not be linted.
      */
     exclude?: string[]
+    /**
+     * UNSTABLE: List of plugins to load. These can be paths, npm or jsr specifiers
+     */
+    plugins?: string[]
     rules?: {
       /**
        * List of tag names that will be run. Empty list disables all tags and will only use rules from `include`.
        *
        * @minItems 0
        */
-      tags?: ('fresh' | 'jsr' | 'jsx' | 'react' | 'recommended')[]
+      tags?: HttpsDenoLandXDenoCliSchemasLintTagsV1Json[]
       /**
        * List of rule names that will be excluded from configured tag sets. If the same rule is in `include` it will be run.
        *
        * @minItems 0
        */
-      exclude?: (
-        | 'adjacent-overload-signatures'
-        | 'ban-ts-comment'
-        | 'ban-types'
-        | 'ban-unknown-rule-code'
-        | 'ban-untagged-ignore'
-        | 'ban-untagged-todo'
-        | 'ban-unused-ignore'
-        | 'camelcase'
-        | 'constructor-super'
-        | 'default-param-last'
-        | 'eqeqeq'
-        | 'explicit-function-return-type'
-        | 'explicit-module-boundary-types'
-        | 'for-direction'
-        | 'fresh-handler-export'
-        | 'fresh-server-event-handlers'
-        | 'getter-return'
-        | 'guard-for-in'
-        | 'no-array-constructor'
-        | 'no-async-promise-executor'
-        | 'no-await-in-loop'
-        | 'no-await-in-sync-fn'
-        | 'no-boolean-literal-for-arguments'
-        | 'no-case-declarations'
-        | 'no-class-assign'
-        | 'no-compare-neg-zero'
-        | 'no-cond-assign'
-        | 'no-console'
-        | 'no-const-assign'
-        | 'no-constant-condition'
-        | 'no-control-regex'
-        | 'no-debugger'
-        | 'no-delete-var'
-        | 'no-deprecated-deno-api'
-        | 'no-dupe-args'
-        | 'no-dupe-class-members'
-        | 'no-dupe-else-if'
-        | 'no-dupe-keys'
-        | 'no-duplicate-case'
-        | 'no-empty'
-        | 'no-empty-character-class'
-        | 'no-empty-enum'
-        | 'no-empty-interface'
-        | 'no-empty-pattern'
-        | 'no-eval'
-        | 'no-ex-assign'
-        | 'no-explicit-any'
-        | 'no-external-import'
-        | 'no-extra-boolean-cast'
-        | 'no-extra-non-null-assertion'
-        | 'no-fallthrough'
-        | 'no-func-assign'
-        | 'no-global-assign'
-        | 'no-implicit-declare-namespace-export'
-        | 'no-import-assertions'
-        | 'no-import-assign'
-        | 'no-inferrable-types'
-        | 'no-inner-declarations'
-        | 'no-invalid-regexp'
-        | 'no-invalid-triple-slash-reference'
-        | 'no-irregular-whitespace'
-        | 'no-misused-new'
-        | 'no-namespace'
-        | 'no-new-symbol'
-        | 'no-node-globals'
-        | 'no-non-null-asserted-optional-chain'
-        | 'no-non-null-assertion'
-        | 'no-obj-calls'
-        | 'no-octal'
-        | 'no-process-globals'
-        | 'no-prototype-builtins'
-        | 'no-redeclare'
-        | 'no-regex-spaces'
-        | 'no-self-assign'
-        | 'no-self-compare'
-        | 'no-setter-return'
-        | 'no-shadow-restricted-names'
-        | 'no-sloppy-imports'
-        | 'no-slow-types'
-        | 'no-sparse-arrays'
-        | 'no-sync-fn-in-async-fn'
-        | 'no-this-alias'
-        | 'no-this-before-super'
-        | 'no-throw-literal'
-        | 'no-top-level-await'
-        | 'no-undef'
-        | 'no-unreachable'
-        | 'no-unsafe-finally'
-        | 'no-unsafe-negation'
-        | 'no-unused-labels'
-        | 'no-unused-vars'
-        | 'no-var'
-        | 'no-window'
-        | 'no-window-prefix'
-        | 'no-with'
-        | 'prefer-as-const'
-        | 'prefer-ascii'
-        | 'prefer-const'
-        | 'prefer-namespace-keyword'
-        | 'prefer-primordials'
-        | 'require-await'
-        | 'require-yield'
-        | 'single-var-declarator'
-        | 'triple-slash-reference'
-        | 'use-isnan'
-        | 'valid-typeof'
-        | 'verbatim-module-syntax'
-      )[]
+      exclude?: HttpsDenoLandXDenoCliSchemasLintRulesV1Json[]
       /**
        * List of rule names that will be run. Even if the same rule is in `exclude` it will be run.
        *
        * @minItems 0
        */
-      include?: (
-        | 'adjacent-overload-signatures'
-        | 'ban-ts-comment'
-        | 'ban-types'
-        | 'ban-unknown-rule-code'
-        | 'ban-untagged-ignore'
-        | 'ban-untagged-todo'
-        | 'ban-unused-ignore'
-        | 'camelcase'
-        | 'constructor-super'
-        | 'default-param-last'
-        | 'eqeqeq'
-        | 'explicit-function-return-type'
-        | 'explicit-module-boundary-types'
-        | 'for-direction'
-        | 'fresh-handler-export'
-        | 'fresh-server-event-handlers'
-        | 'getter-return'
-        | 'guard-for-in'
-        | 'no-array-constructor'
-        | 'no-async-promise-executor'
-        | 'no-await-in-loop'
-        | 'no-await-in-sync-fn'
-        | 'no-boolean-literal-for-arguments'
-        | 'no-case-declarations'
-        | 'no-class-assign'
-        | 'no-compare-neg-zero'
-        | 'no-cond-assign'
-        | 'no-console'
-        | 'no-const-assign'
-        | 'no-constant-condition'
-        | 'no-control-regex'
-        | 'no-debugger'
-        | 'no-delete-var'
-        | 'no-deprecated-deno-api'
-        | 'no-dupe-args'
-        | 'no-dupe-class-members'
-        | 'no-dupe-else-if'
-        | 'no-dupe-keys'
-        | 'no-duplicate-case'
-        | 'no-empty'
-        | 'no-empty-character-class'
-        | 'no-empty-enum'
-        | 'no-empty-interface'
-        | 'no-empty-pattern'
-        | 'no-eval'
-        | 'no-ex-assign'
-        | 'no-explicit-any'
-        | 'no-external-import'
-        | 'no-extra-boolean-cast'
-        | 'no-extra-non-null-assertion'
-        | 'no-fallthrough'
-        | 'no-func-assign'
-        | 'no-global-assign'
-        | 'no-implicit-declare-namespace-export'
-        | 'no-import-assertions'
-        | 'no-import-assign'
-        | 'no-inferrable-types'
-        | 'no-inner-declarations'
-        | 'no-invalid-regexp'
-        | 'no-invalid-triple-slash-reference'
-        | 'no-irregular-whitespace'
-        | 'no-misused-new'
-        | 'no-namespace'
-        | 'no-new-symbol'
-        | 'no-node-globals'
-        | 'no-non-null-asserted-optional-chain'
-        | 'no-non-null-assertion'
-        | 'no-obj-calls'
-        | 'no-octal'
-        | 'no-process-globals'
-        | 'no-prototype-builtins'
-        | 'no-redeclare'
-        | 'no-regex-spaces'
-        | 'no-self-assign'
-        | 'no-self-compare'
-        | 'no-setter-return'
-        | 'no-shadow-restricted-names'
-        | 'no-sloppy-imports'
-        | 'no-slow-types'
-        | 'no-sparse-arrays'
-        | 'no-sync-fn-in-async-fn'
-        | 'no-this-alias'
-        | 'no-this-before-super'
-        | 'no-throw-literal'
-        | 'no-top-level-await'
-        | 'no-undef'
-        | 'no-unreachable'
-        | 'no-unsafe-finally'
-        | 'no-unsafe-negation'
-        | 'no-unused-labels'
-        | 'no-unused-vars'
-        | 'no-var'
-        | 'no-window'
-        | 'no-window-prefix'
-        | 'no-with'
-        | 'prefer-as-const'
-        | 'prefer-ascii'
-        | 'prefer-const'
-        | 'prefer-namespace-keyword'
-        | 'prefer-primordials'
-        | 'require-await'
-        | 'require-yield'
-        | 'single-var-declarator'
-        | 'triple-slash-reference'
-        | 'use-isnan'
-        | 'valid-typeof'
-        | 'verbatim-module-syntax'
-      )[]
+      include?: HttpsDenoLandXDenoCliSchemasLintRulesV1Json[]
       [k: string]: unknown
     }
     /**
@@ -480,6 +519,70 @@ export interface DenoConfigurationFileSchema {
      * Whether to prefer using semicolons.
      */
     semiColons?: boolean
+    /**
+     * Change when properties in objects are quoted in JavaScript and TypeScript.
+     */
+    quoteProps?: 'asNeeded' | 'consistent' | 'preserve'
+    /**
+     * The newline character to use.
+     */
+    newLineKind?: 'auto' | 'crlf' | 'lf' | 'system'
+    /**
+     * Whether to use braces for if statements, for statements, and while statements in JavaScript and TypeScript.
+     */
+    useBraces?: 'maintain' | 'whenNotSingleLine' | 'always' | 'preferNone'
+    /**
+     * The position of opening braces for blocks in JavaScript and TypeScript.
+     */
+    bracePosition?:
+      | 'maintain'
+      | 'sameLine'
+      | 'nextLine'
+      | 'sameLineUnlessHanging'
+    /**
+     * The position of the body in single body blocks in JavaScript and TypeScript.
+     */
+    singleBodyPosition?:
+      | 'maintain'
+      | 'sameLine'
+      | 'nextLine'
+      | 'sameLineUnlessHanging'
+    /**
+     * Where to place the next control flow within a control flow statement in JavaScript and TypeScript.
+     */
+    nextControlFlowPosition?: 'maintain' | 'sameLine' | 'nextLine'
+    /**
+     * Whether to add trailing commas in JavaScript and TypeScript.
+     */
+    trailingCommas?: 'never' | 'always' | 'onlyMultiLine'
+    /**
+     * Where to place the operator for expressions that span multiple lines in JavaScript and TypeScript.
+     */
+    operatorPosition?: 'maintain' | 'sameLine' | 'nextLine'
+    /**
+     * If the end angle bracket of a jsx open element or self closing element should be on the same or next line when the attributes span multiple lines.
+     */
+    'jsx.bracketPosition'?: 'maintain' | 'sameLine' | 'nextLine'
+    /**
+     * Forces newlines surrounding the content of JSX elements.
+     */
+    'jsx.forceNewLineSurroundingContent'?: boolean
+    /**
+     * Surrounds the top-most JSX element or fragment in parentheses when it spans multiple lines.
+     */
+    'jsx.multiLineParens'?: 'never' | 'prefer' | 'always'
+    /**
+     * The kind of separator to use in type literals.
+     */
+    'typeLiteral.separatorKind'?: 'comma' | 'semiColon'
+    /**
+     * Whether to place spaces around enclosed expressions in JavaScript and TypeScript.
+     */
+    spaceAround?: boolean
+    /**
+     * Whether to add a space surrounding the properties of single line object-like nodes in JavaScript and TypeScript.
+     */
+    spaceSurroundingProperties?: boolean
     options?: {
       /**
        * Whether to use tabs (true) or spaces (false) for indentation.
@@ -509,6 +612,15 @@ export interface DenoConfigurationFileSchema {
     }
     [k: string]: unknown
   }
+  minimumDependencyAge?:
+    | MinimumDependencyAgeDate
+    | {
+      age?: MinimumDependencyAgeDate
+      /**
+       * List of jsr or npm packages to exclude from requiring a minimum dependnecy age.
+       */
+      exclude?: string[]
+    }
   nodeModulesDir?: ('auto' | 'manual' | 'none') | boolean
   /**
    * Enables or disables the use of a local vendor folder as a local cache for remote modules and node_modules folder for npm packages. Alternatively, use the `--vendor` flag or override the config via `--vendor=false`. Requires Deno 1.36.1 or later.
@@ -552,22 +664,22 @@ export interface DenoConfigurationFileSchema {
      * List of files, directories or globs that will not be searched for tests.
      */
     exclude?: string[]
+    permissions?: PermissionNameOrSet
     [k: string]: unknown
   }
-  /**
-   * Configuration for deno publish
-   */
-  publish?: {
-    /**
-     * List of files, directories or globs that will be included in the published package.
-     */
-    include?: string[]
-    /**
-     * List of files, directories or globs that will be excluded from the published package.
-     */
-    exclude?: string[]
-    [k: string]: unknown
-  }
+  publish?:
+    | {
+      /**
+       * List of files, directories or globs that will be included in the published package.
+       */
+      include?: string[]
+      /**
+       * List of files, directories or globs that will be excluded from the published package.
+       */
+      exclude?: string[]
+      [k: string]: unknown
+    }
+    | 'false'
   /**
    * Configuration for deno bench
    */
@@ -580,6 +692,7 @@ export interface DenoConfigurationFileSchema {
      * List of files, directories or globs that will not be searched for benchmarks.
      */
     exclude?: string[]
+    permissions?: PermissionNameOrSet
     [k: string]: unknown
   }
   /**
@@ -608,7 +721,7 @@ export interface DenoConfigurationFileSchema {
    */
   unstable?: string[]
   /**
-   * The name of this JSR package. Must be scoped
+   * The name of this JSR or workspace package.
    */
   name?: string
   /**
@@ -625,9 +738,20 @@ export interface DenoConfigurationFileSchema {
       [k: string]: string
     }
   /**
-   * UNSTABLE: List of relative paths to folders containing JSR packages to use local versions of.
+   * Named permission sets that can be selected with -P/--permission-set or referenced in "test", "bench", or "compile" permissions. A special name "default" is used when -P is passed without a value.
+   */
+  permissions?: {
+    [k: string]: PermissionSet
+  }
+  /**
+   * @deprecated
+   * This unstable property was renamed to "links" in Deno 2.3.6.
    */
   patch?: string[]
+  /**
+   * UNSTABLE: List of relative paths to folders containing JSR packages to use local versions of.
+   */
+  links?: string[]
   workspace?:
     | string[]
     | {
@@ -638,4 +762,36 @@ export interface DenoConfigurationFileSchema {
       [k: string]: unknown
     }
   [k: string]: unknown
+}
+/**
+ * Collection of permissions.
+ */
+export interface PermissionSet {
+  /**
+   * Allow all permissions for the program to run unrestricted.
+   */
+  all?: boolean
+  read?: AllowDenyIgnorePermissionConfigValue
+  write?: AllowDenyPermissionConfigValue
+  import?: AllowDenyPermissionConfigValue
+  env?: AllowDenyIgnorePermissionConfigValue
+  net?: AllowDenyPermissionConfigValue
+  run?: AllowDenyPermissionConfigValue
+  ffi?: AllowDenyPermissionConfigValue
+  sys?: AllowDenyPermissionConfigValue
+}
+/**
+ * Object form to allow, deny, and/or ignore permissions.
+ */
+export interface AllowDenyIgnorePermissionConfig {
+  allow?: PermissionConfigValue
+  deny?: PermissionConfigValue
+  ignore?: PermissionConfigValue
+}
+/**
+ * Object form to allow and/or deny permissions.
+ */
+export interface AllowDenyPermissionConfig {
+  allow?: PermissionConfigValue
+  deny?: PermissionConfigValue
 }
