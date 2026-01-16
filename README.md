@@ -7,22 +7,8 @@ and remove unused entries in the Deno config file of your Deno projects.
 
 To run the CLI tool:
 
-#### Longest, most restrictive:
-
-```
-deno run --allow-read --allow-write=deno.jsonc,deno.json,import_map.json,test.deno.jsonc,test.deno.json,test.import_map.json --allow-run=deno,git jsr:@maximilian-hammerl/deno-project-config-check
-```
-
-#### Middle of the road:
-
-```
-deno run --allow-read --allow-write --allow-run jsr:@maximilian-hammerl/deno-project-config-check
-```
-
-#### Shortest, least restrictive:
-
-```
-deno run --allow-all jsr:@maximilian-hammerl/deno-project-config-check
+```shell
+deno x jsr:@maximilian-hammerl/deno-project-config-check
 ```
 
 ### Permissions

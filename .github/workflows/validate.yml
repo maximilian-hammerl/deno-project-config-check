@@ -13,8 +13,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: denoland/setup-deno@v2
-        with:
-          deno-version: stable
 
       - name: Format
         run: deno task format-check
