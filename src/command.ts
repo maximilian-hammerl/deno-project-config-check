@@ -1,46 +1,41 @@
+import { join, parse } from '@std/path'
+
 import log from './log.ts'
 
 async function runCommand(
   command: Deno.Command,
 ): Promise<boolean> {
   try {
-    const { code, stdout, stderr } = await command.output()
+    const { success, code, stdout, stderr } = await command.output()
 
     log.debug(`Code is ${code} (${code === 0 ? 'success' : 'failure'})`, {
       stout: new TextDecoder().decode(stdout),
       stderr: new TextDecoder().decode(stderr),
     })
 
-    return code === 0
+    return success
   } catch (error) {
     throw new Error(`Error running command: ${error}`)
   }
 }
 
 export async function runDenoCheck(
-  configFilename: string,
+  configFilepath: string,
 ): Promise<boolean> {
+  const parsedConfigFilePath = parse(configFilepath)
+
   const denoCheckCommand = new Deno.Command(Deno.execPath(), {
-    args: ['check', '--config', configFilename, '**/*.ts'],
+    args: [
+      'check',
+      '--config',
+      configFilepath,
+      join(parsedConfigFilePath.dir, '**/*.ts'),
+    ],
   })
 
   return await runCommand(
     denoCheckCommand,
   )
-}
-
-export async function restoreFiles(): Promise<void> {
-  const gitRestoreCommand = new Deno.Command('git', {
-    args: ['restore', '--quiet', '.'],
-  })
-
-  const success = await runCommand(
-    gitRestoreCommand,
-  )
-
-  if (!success) {
-    throw new Error('Failed to restore files')
-  }
 }
 
 export async function checkHasUncommittedChanges(): Promise<boolean> {

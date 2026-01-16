@@ -25,7 +25,7 @@ function denoConfigFileHasImportEntries(
 }
 
 async function findRemovableImportEntries(
-  testFilename: string,
+  testFilepath: string,
   config: DenoConfigurationFileSchemaWithImports,
 ): Promise<Array<string>> {
   const removableImportEntries: Array<string> = []
@@ -36,10 +36,10 @@ async function findRemovableImportEntries(
     const currentConfig = structuredClone(config)
     delete currentConfig.imports[key]
 
-    await writeDenoConfigFile(testFilename, currentConfig)
+    await writeDenoConfigFile(testFilepath, currentConfig)
 
     console.log('Running deno check')
-    const checkSuccess = await runDenoCheck(testFilename)
+    const checkSuccess = await runDenoCheck(testFilepath)
     if (!checkSuccess) {
       console.info(`Imports entry ${key} is required`)
       continue

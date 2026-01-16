@@ -26,7 +26,7 @@ function denoConfigFileHasUnstableEntries(
 }
 
 async function findRemovableUnstableEntries(
-  testFilename: string,
+  testFilepath: string,
   config: DenoConfigurationFileSchemaWithUnstable,
 ): Promise<Array<string>> {
   const removableUnstableEntries: Array<string> = []
@@ -39,10 +39,10 @@ async function findRemovableUnstableEntries(
       x !== unstable
     )
 
-    await writeDenoConfigFile(testFilename, currentConfig)
+    await writeDenoConfigFile(testFilepath, currentConfig)
 
     console.log('Running deno check')
-    const checkSuccess = await runDenoCheck(testFilename)
+    const checkSuccess = await runDenoCheck(testFilepath)
     if (!checkSuccess) {
       console.info(`Unstable entry ${unstable} is required`)
       continue

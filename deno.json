@@ -1,6 +1,6 @@
 {
   "name": "@maximilian-hammerl/deno-project-config-check",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "tasks": {
     "format": "deno fmt",
@@ -16,7 +16,8 @@
   },
   "imports": {
     "@std/cli": "jsr:@std/cli@1.0.25",
-    "@std/jsonc": "jsr:@std/jsonc@1.0.2"
+    "@std/jsonc": "jsr:@std/jsonc@1.0.2",
+    "@std/path": "jsr:@std/path@1.1.4"
   },
   "lint": {
     "rules": {

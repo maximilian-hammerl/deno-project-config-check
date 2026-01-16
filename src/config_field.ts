@@ -9,7 +9,7 @@ export type DenoConfigFieldToCheck<
     config: DenoConfigurationFileSchema,
   ) => config is FileSchemaWithField
   findRemovableEntries: (
-    testFilename: string,
+    testFilepath: string,
     config: FileSchemaWithField,
   ) => Promise<Array<string>>
   removeRemovableEntries: (
@@ -28,7 +28,7 @@ export async function checkDenoConfigField<
     findRemovableEntries,
     removeRemovableEntries,
   }: DenoConfigFieldToCheck<FileSchemaWithField>,
-  testFilename: string,
+  testFilepath: string,
   config: DenoConfigurationFileSchema,
 ): Promise<boolean> {
   if (!isCheckFieldEnabled) {
@@ -43,7 +43,7 @@ export async function checkDenoConfigField<
 
   console.info(`Testing removal of ${field} entries`)
   const removableEntries = await findRemovableEntries(
-    testFilename,
+    testFilepath,
     config,
   )
 
